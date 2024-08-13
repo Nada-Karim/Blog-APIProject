@@ -1,0 +1,29 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  port: <%= ENV['POSTGRES_PORT'] %>
+  username: postgres
+  password: nada
+
+
+
+
+development:
+  <<: *default
+  database: web_ops
+  username: postgres
+  password: nada
+  
+
+test:
+  <<: *default
+
+  
+
+production:
+  <<: *default
+
+
