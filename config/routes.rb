@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :posts
   post "signup", to: "user#signup"
   post "login", to: "user#login"
