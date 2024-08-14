@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  skip_before_action :authenticate_request, only: [ :login, :signup ]
+  before_action :authenticate_request, except: [ :login, :signup ]
 
   def signup
     user = User.new(user_params)
@@ -12,19 +12,25 @@ class UserController < ApplicationController
   end
 
   def login
-    user = User.find_by_email(params[:email])
-    if user && user.valid_password?(params[:password])
-      token = JsonWebToken.encode(user_id: user.id)
-      render json: { token: token }, status: :ok
+    command = AuthenticateUser.call(params[:email], params[:password])
+
+    if command.success?
+       render json: { token: JsonWebToken.encode(user_id: command.result.id) }, status: :ok
     else
-      render json: { error: "Invalid email or password" }, status: :unauthorized
+      render json: { error: command.errors.full_messages }, status: :unauthorized
     end
   end
 
   def test
-    render json: {
-          message: "You have passed"
-        }
+    render json: { message: "You have passed authentication", user: @current_user }
+  end
+
+  def testOne
+    token = JsonWebToken.encode(user_id: 1)
+    decoded_token = JsonWebToken.decode(token)
+    render json: { token: decoded_token }
+    @current_user = User.find(decoded_token[:user_id])
+    # render json: { user: @current_user }
   end
 
   private

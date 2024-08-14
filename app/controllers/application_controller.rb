@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_request
+   attr_reader :current_user
 
-  private
+   private
 
-  def authenticate_request
-    token = request.headers["Authorization"].split(" ").last
-    decoded_token = JsonWebToken.decode(token)
-    @current_user = User.find(decoded_token[:user_id]) if decoded_token
-  rescue
-    render json: { error: "Not Authorized" }, status: :unauthorized
-  end
+   def authenticate_request
+     @current_user = AuthorizeApiRequest.call(request.headers).result
+      Rails.logger.debug("Current User: #{@user}")
+     render json: { error: "Not Authorized" }, status: 401 unless @current_user
+   end
 end
