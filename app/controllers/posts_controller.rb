@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
+  before_action :authorize_user!, only: %i[ update destroy ]
 
   # GET /posts
   def index
@@ -16,9 +17,9 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-
+    @post.user = @current_user
     if @post.save
-      render json: @post, status: :created, location: @post
+      render json: { message: "Post created successfully" }, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      render json: @post
+      render json: { message: "Post updated successfully" }, status: :ok
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -35,7 +36,10 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    @post.destroy!
+   if  @post.destroy!
+      render json: { message: "Post deleted successfully" }, status: :ok
+
+   end
   end
 
   private
@@ -44,8 +48,11 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def authorize_user!
+      render json: { error: "You are not authorized to perform this action" }, status: :forbidden unless @post.user == @current_user
+    end
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body, :user_id, :tags)
+      params.require(:post).permit(:title, :body, :tags)
     end
 end
