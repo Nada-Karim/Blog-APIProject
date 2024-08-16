@@ -348,7 +348,7 @@ Before accessing any endpoints related to posts, you must sign up or log in to r
           ]
       }
 
-## Update a Post
+## Update a Post or Tags
 ### Happy scenario
   - **Endpoint:** PUT /posts/:id (with the authentication token of the post author)
   - **Request Body:**
