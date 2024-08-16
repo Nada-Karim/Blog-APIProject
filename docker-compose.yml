@@ -13,7 +13,6 @@ services:
 
   redis:
     image: redis:6
-    command: redis-server
     ports:
       - "6379:6379"
 
@@ -25,7 +24,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      # command: bash -c "bundle exec rake db:create db:migrate && bundle exec rails server -b 0.0.0.0 -p 3000"
+      JWT_SECRET_KEY: f3d3d21a5b91fbd29f34e05d6f7b6d8f348b8c5b7a91eae90e4e5b7636f7d7
+      REDIS_URL: redis://redis:6379/1
     volumes:
       - .:/app
     ports:
