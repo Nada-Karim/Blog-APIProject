@@ -2,16 +2,15 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
   before_action :authorize_user!, only: %i[ update destroy ]
 
-  # GET /posts
   def index
-    @posts = Post.all.includes(:tags)
+    @posts = Post.all.includes(:tags, :comments)
 
-    render json: @posts.to_json(include: :tags)
+    render json: @posts.to_json(include: { tags: {}, comments: { include: :user } })
   end
 
   # GET /posts/1
   def show
-    render json: @post.to_json(include: :tags)
+    render json: @post.to_json(include: { tags: {}, comments: { include: :user } })
   end
 
   # POST /posts
