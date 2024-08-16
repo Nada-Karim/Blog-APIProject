@@ -93,8 +93,14 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     drb (2.2.1)
     erubi (1.13.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -265,6 +271,8 @@ DEPENDENCIES
   brakeman
   debug
   devise (~> 4.8)
+  dotenv-rails (~> 2.1, >= 2.1.1)
+  faker
   jwt (~> 2.2)
   pg (~> 1.1)
   puma (>= 5.0)

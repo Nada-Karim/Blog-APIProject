@@ -45,3 +45,5 @@ end
 
 gem "sidekiq", "~> 7.3"
 gem "redis"
+gem "faker"
+gem "dotenv-rails", "~> 2.1", ">= 2.1.1"
