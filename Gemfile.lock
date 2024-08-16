@@ -93,10 +93,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    dotenv (2.8.1)
-    dotenv-rails (2.8.1)
-      dotenv (= 2.8.1)
-      railties (>= 3.2)
+    dotenv (3.1.2)
+    dotenv-rails (3.1.2)
+      dotenv (= 3.1.2)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
     faker (3.4.2)
@@ -124,7 +124,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    minitest (5.24.1)
+    minitest (5.25.0)
     msgpack (1.7.2)
     net-imap (0.4.14)
       date
@@ -271,7 +271,7 @@ DEPENDENCIES
   brakeman
   debug
   devise (~> 4.8)
-  dotenv-rails (~> 2.1, >= 2.1.1)
+  dotenv-rails (~> 3.1)
   faker
   jwt (~> 2.2)
   pg (~> 1.1)
