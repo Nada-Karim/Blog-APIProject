@@ -110,7 +110,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.7.2)
-    jwt (2.8.2)
+    jwt (2.9.0)
       base64
     language_server-protocol (3.17.0.3)
     logger (1.6.0)
@@ -273,7 +273,7 @@ DEPENDENCIES
   devise (~> 4.8)
   dotenv-rails (~> 2.1, >= 2.1.1)
   faker
-  jwt (~> 2.2)
+  jwt (~> 2.9)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.0)
